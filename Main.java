@@ -13,8 +13,8 @@ public class Main
 		{
 			System.out.println("Tour du joueur " + player.getPlayer());
 			tableau.display();
-			player.play(read.nextLine(),tableau);
-			player.changePlayer();
+			if (player.play(read.nextLine(),tableau)) player.changePlayer();
+			
         }
 
         read.close();
