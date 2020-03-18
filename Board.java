@@ -106,14 +106,18 @@ public class Board {
 		char player = joueur.getPlayer();
 		Boolean flag = true;
 
+		// checking diagonal from upper left to lower right `\`
 		for (int i=0;i<this.Board.length;i++)
 		{
 			if (this.Board[i][i] != player) flag=false;
 		}
 		if (flag) return flag;
+		else flag = true;
+
+		// check diagonal from upper right to lower left `/`
 		for(int i=0;i<this.Board.length;i++)
 		{
-			if (this.Board[2-i][i]!=player) flag=false;
+			if (this.Board[(this.Board.length-1)-i][i]!=player) flag=false;
 		}
 		return flag;
 	}
