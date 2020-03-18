@@ -1,11 +1,16 @@
 public class Board {
-	private char[][] Board = new char[3][3];
+	private char[][] Board;
 
-	public Board()
+	public Board(int boardsize)
 	{
-		for (int i=0;i<3;i++)
+		this.Board = new char[boardsize][boardsize];
+		for (int i=0;
+			i<boardsize;
+			i++)
 		{
-			for (int j=0;j<3;j++)
+			for (int j=0;
+				j<boardsize;
+				j++)
 			{
 				this.Board[i][j]=' ';
 			}
@@ -56,6 +61,7 @@ public class Board {
 		case 'B': coord[0]=1;
 				break;
 		case 'C': coord[0]=2;
+				break;
 		}
 		switch(position.charAt(1))
 		{
@@ -73,10 +79,14 @@ public class Board {
 	{
 		char player = joueur.getPlayer();
 		Boolean flag=true;
-		for (int i=0;i<3;i++)
+		for (int i=0;
+			i<this.Board.length;
+			i++)
 		{
 			flag=true;
-			for (int j=0;j<3;j++)
+			for (int j=0;
+				j<this.Board.length;
+				j++)
 			{
 				if (this.Board[j][i] != player) return false;
 			}
@@ -89,10 +99,14 @@ public class Board {
 	{
 		char player = joueur.getPlayer();
 		Boolean flag=true;
-		for (int i=0;i<3;i++)
+		for (int i=0;
+			i<this.Board.length;
+			i++)
 		{
 			flag=true;
-			for (int j=0;j<3;j++)
+			for (int j=0;
+				j<this.Board.length;
+				j++)
 			{
 				if (this.Board[i][j] != player) flag = false;
 			}
@@ -107,7 +121,9 @@ public class Board {
 		Boolean flag = true;
 
 		// checking diagonal from upper left to lower right `\`
-		for (int i=0;i<this.Board.length;i++)
+		for (int i=0;
+			i<this.Board.length;
+			i++)
 		{
 			if (this.Board[i][i] != player) flag=false;
 		}
@@ -115,7 +131,9 @@ public class Board {
 		else flag = true;
 
 		// check diagonal from upper right to lower left `/`
-		for(int i=0;i<this.Board.length;i++)
+		for(int i=0;
+			i<this.Board.length;
+			i++)
 		{
 			if (this.Board[(this.Board.length-1)-i][i]!=player) flag=false;
 		}
@@ -129,9 +147,13 @@ public class Board {
 
 	private Boolean boardRempli()
 	{
-		for (int i=0;i<this.Board.length;i++)
+		for (int i=0;
+			i<this.Board.length;
+			i++)
 		{
-			for (int j=0;j<this.Board.length;j++)
+			for (int j=0;
+				j<this.Board.length;
+				j++)
 			{
 				if (this.Board[i][j]==' ') return false;
 			}

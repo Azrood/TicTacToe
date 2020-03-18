@@ -8,9 +8,7 @@ public class Player
     }
     
     protected void changePlayer()
-	{ 
-		// TODO : check if round is played correctly before changing
-		
+	{	
 		if (this.getPlayer() == 'x') this.player = 'o';
 		else this.player = 'x';
     }
@@ -24,9 +22,8 @@ public class Player
 	{
 		int x = plat.getPosition(position)[0];
 		int y = plat.getPosition(position)[1];
-		if (plat.getContent(x,y)== ' ')
+		if (plat.getContent(x,y)==' ')
 		{
-            // TODO : to be properly implemented
 			if (this.getPlayer()=='x') plat.setContent(x,y,'x');
 			else plat.setContent(x,y,'o');
 			return true;
