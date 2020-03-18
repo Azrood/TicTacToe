@@ -11,6 +11,16 @@ public class Board {
 			}
 		}
 	}
+
+	protected char getContent(int x, int y)
+	{
+		return this.Board[x][y];
+	}
+
+	protected void setContent(int x, int y, char content)
+	{
+		this.Board[x][y] = content;
+	}
 	
 	public void display()
 	{
@@ -59,7 +69,7 @@ public class Board {
 		return coord;
 	}
 
-	protected Boolean checkColonne(Player joueur)
+	private Boolean checkColonne(Player joueur)
 	{
 		char player = joueur.getPlayer();
 		Boolean flag=true;
@@ -75,7 +85,7 @@ public class Board {
 		return flag;
 	}
 
-	protected Boolean checkLigne(Player joueur)
+	private Boolean checkLigne(Player joueur)
 	{
 		char player = joueur.getPlayer();
 		Boolean flag=true;
@@ -91,7 +101,7 @@ public class Board {
 		return flag;
 	}
 
-	protected Boolean checkDiagonale(Player joueur)
+	private Boolean checkDiagonale(Player joueur)
 	{
 		char player = joueur.getPlayer();
 		Boolean flag = true;
@@ -113,6 +123,18 @@ public class Board {
 		return this.checkDiagonale(joueur) || this.checkLigne(joueur) || this.checkColonne(joueur);
 	}
 
+	private Boolean boardRempli()
+	{
+		for (int i=0;i<this.Board.length;i++)
+		{
+			for (int j=0;j<this.Board.length;j++)
+			{
+				if (this.Board[i][j]==' ') return false;
+			}
+		}
+		return true;
+	}
+
 	protected Boolean winOrDraw(Player joueur)
 	{
 		if (this.joueurGagne(joueur)) 
@@ -127,16 +149,5 @@ public class Board {
 			}
 		else return false;
 	}
-
-	protected Boolean boardRempli()
-	{
-		for (int i=0;i<this.Board.length;i++)
-		{
-			for (int j=0;j<this.Board.length;j++)
-			{
-				if (this.Board[i][j]==' ') return false;
-			}
-		}
-		return true;
-	}
+	
 }
