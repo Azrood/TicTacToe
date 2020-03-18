@@ -9,14 +9,20 @@ public class Main
 
 		tableau.display();
 		Scanner read=new Scanner(System.in);
-		while (tableau.winOrDraw(player)==false)
+		while (true)
 		{
 			System.out.println("Tour du joueur " + player.getPlayer());
-			tableau.display();
-			if (player.play(read.nextLine(),tableau)) player.changePlayer();
-			
+            if (player.play(read.nextLine(),tableau))
+                {
+                    if(!tableau.winOrDraw(player)) player.changePlayer();
+                    else
+                    {
+                        tableau.display();
+                        break;
+                    }
+                }
+            tableau.display();
         }
-
         read.close();
     }
 }
