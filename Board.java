@@ -1,22 +1,8 @@
-import java.util.Scanner;
 public class Board {
 	private char[][] Board = new char[3][3];
-	char player;
-
-	protected char getPlayer()
-	{
-		return player;
-	}
-
-	protected void changePlayer()
-	{
-		if (this.getPlayer() == 'x') this.player = 'o';
-		else this.player = 'x';
-	}
 
 	public Board()
 	{
-		this.player = 'x';
 		for (int i=0;i<3;i++)
 		{
 			for (int j=0;j<3;j++)
@@ -73,22 +59,9 @@ public class Board {
 		return coord;
 	}
 
-	protected Boolean play(String position)
+	protected Boolean checkColonne(Player joueur)
 	{
-		int x=getPosition(position)[0];
-		int y=getPosition(position)[1];
-		if (this.Board[x][y]==' ')
-		{
-			if (this.getPlayer()=='x') this.Board[x][y] = 'x';	
-			else this.Board[x][y] = 'o';
-			return true;
-		}
-		else return false;
-	}
-
-	protected Boolean checkColonne()
-	{
-		char player = this.getPlayer();
+		char player = joueur.getPlayer();
 		Boolean flag=true;
 		for (int i=0;i<3;i++)
 		{
@@ -102,9 +75,9 @@ public class Board {
 		return flag;
 	}
 
-	protected Boolean checkLigne()
+	protected Boolean checkLigne(Player joueur)
 	{
-		char player = this.getPlayer();
+		char player = joueur.getPlayer();
 		Boolean flag=true;
 		for (int i=0;i<3;i++)
 		{
@@ -118,36 +91,36 @@ public class Board {
 		return flag;
 	}
 
-	protected Boolean checkDiagonale()
+	protected Boolean checkDiagonale(Player joueur)
 	{
-		char player = this.getPlayer();
-		Boolean flag=true;
+		char player = joueur.getPlayer();
+		Boolean flag = true;
 
-		for (int i=0;i<3;i++)
+		for (int i=0;i<this.Board.length;i++)
 		{
 			if (this.Board[i][i] != player) flag=false;
 		}
 		if (flag) return flag;
-		for(int i=0;i<3;i++)
+		for(int i=0;i<this.Board.length;i++)
 		{
 			if (this.Board[2-i][i]!=player) flag=false;
 		}
 		return flag;
 	}
 
-	protected Boolean joueurGagne()
+	private Boolean joueurGagne(Player joueur)
 	{
-		return this.checkDiagonale() || this.checkLigne() || this.checkColonne();
+		return this.checkDiagonale(joueur) || this.checkLigne(joueur) || this.checkColonne(joueur);
 	}
 
-	protected Boolean winOrDraw()
+	protected Boolean winOrDraw(Player joueur)
 	{
-		if (this.joueurGagne()) 
+		if (this.joueurGagne(joueur)) 
 		{
-			System.out.println("le joueur "+this.getPlayer()+" a gagne");
+			System.out.println("le joueur "+joueur.getPlayer()+" a gagne");
 			return true;
 		}
-		else if(this.boardRempli() && !this.joueurGagne()) 
+		else if(this.boardRempli() && !this.joueurGagne(joueur)) 
 			{
 				System.out.println("Match nul !");
 				return true;
@@ -157,26 +130,13 @@ public class Board {
 
 	protected Boolean boardRempli()
 	{
-		for (int i=0;i<3;i++)
+		for (int i=0;i<this.Board.length;i++)
 		{
-			for (int j=0;j<3;j++)
+			for (int j=0;j<this.Board.length;j++)
 			{
 				if (this.Board[i][j]==' ') return false;
 			}
 		}
 		return true;
-	}
-	public static void main(String[] args)
-	{
-		Board tableau = new Board();
-		tableau.display();
-		Scanner read=new Scanner(System.in);
-		while (tableau.winOrDraw()==false)
-		{
-			System.out.println("Tour du joueur "+tableau.getPlayer());
-			tableau.display();
-			tableau.play(read.nextLine());
-			tableau.changePlayer();
-		}
 	}
 }
